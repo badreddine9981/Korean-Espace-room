@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>غرفة الهروب - كوريا الجنوبية</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Tajawal', Arial, sans-serif;
+    background: linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 50%, #0d1127 100%);
+    color: #e8e8e8;
+    text-align: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at 20% 80%, rgba(255, 0, 80, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 100, 255, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+h1 {
+    color: #ff2d78;
+    margin-top: 20px;
+    font-size: 2.5em;
+    font-weight: 900;
+    text-shadow: 0 0 20px rgba(255, 45, 120, 0.5);
+    position: relative;
+    z-index: 1;
+}
+
+.subtitle {
+    color: #4ecdc4;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+#room {
+    margin-top: 20px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.box {
+    background: linear-gradient(145deg, #1a1f3a 0%, #0f1429 100%);
+    padding: 25px;
+    margin: 15px auto;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 16px;
+    border: 1px solid rgba(78, 205, 196, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.box:hover {
+    border-color: rgba(255, 45, 120, 0.5);
+    transform: translateY(-2px);
+}
+
+.box h2 {
+    color: #ff2d78;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.box p {
+    color: #b8c5d6;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.clue-box {
+    background: rgba(255, 45, 120, 0.1);
+    border: 1px dashed rgba(255, 45, 120, 0.4);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.clue-box b { color: #ff2d78; }
+
+button {
+    padding: 12px 25px;
+    margin-top: 15px;
+    background: linear-gradient(135deg, #ff2d78 0%, #c7004c 100%);
+    border: none;
+    cursor: pointer;
+    border-radius: 25px;
+    font-weight: bold;
+    color: white;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 45, 120, 0.3);
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 45, 120, 0.5);
+}
+
+input {
+    padding: 12px;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 25px;
+    border: 2px solid rgba(78, 205, 196, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    color: #e8e8e8;
+    text-align: center;
+    font-size: 1.1em;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4ecdc4;
+    box-shadow: 0 0 15px rgba(78, 205, 196, 0.3);
+}
+
+input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+#inventory {
+    margin-top: 20px;
+    color: #4ecdc4;
+    font-size: 1.1em;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    background: rgba(78, 205, 196, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.hidden { display: none; }
+
+#message {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #ff2d78;
+    font-weight: bold;
+    min-height: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.success {
+    color: #4ecdc4 !important;
+    text-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+}
+
+.error { color: #ff4757 !important; }
+
+.kpop-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px rgba(255, 45, 120, 0.5); }
+    to { text-shadow: 0 0 20px rgba(255, 45, 120, 0.8), 0 0 30px rgba(78, 205, 196, 0.3); }
+}
+
+.korean-pattern {
+    font-size: 2em;
+    margin: 10px 0;
+    opacity: 0.6;
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #4ecdc4 0%, #2a8a84 100%) !important;
+    margin-top: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<h1 class="kpop-glow">🇰🇷 غرفة الهروب الكورية 🇰🇷</h1>
+<p class="subtitle">اكتشف أسرار كوريا الجنوبية وهرب من المعبد القديم</p>
+
+<div id="inventory">
+    🎒 الحقيبة: فارغة
+</div>
+
+<div id="room">
+
+    <!-- الغرفة 1: سول -->
+    <div class="box" id="room1">
+        <div class="korean-pattern">🏙️</div>
+        <h2>الغرفة الأولى: شوارع سول</h2>
+        <p>أنت في شوارع سول المزدحمة. أمامك باب خشبي قديم يحمل رموزاً كورية.</p>
+        
+        <div class="clue-box">
+            <b>🔍 فكرة:</b> "المفتاح ليس ما تراه، بل ما تشعر به في قلبك. ابحث في الرمال الذهبية."
+        </div>
+        
+        <button onclick="takeKey()">🔍 البحث في الرمال</button>
+    </div>
+
+    <!-- الغرفة 2: بوسان -->
+    <div class="box hidden fade-in" id="room2">
+        <div class="korean-pattern">🌊</div>
+        <h2>الغرفة الثانية: شاطئ بوسان</h2>
+        <p>وصلت إلى شاطئ بوسان الجميل. باب ضخم يحجب طريقك إلى المعبد الكوري القديم.</p>
+        
+        <div class="clue-box">
+            <b>🔐 كلمة السر:</b> "ما هي الكلمة التي تفتح كل القلوب؟"
+        </div>
+        
+        <input id="code" placeholder="اكتب كلمة السر هنا...">
+        <br>
+        <button onclick="checkCode()">🔓 فتح الباب</button>
+    </div>
+
+    <!-- الغرفة 3: جيونجو -->
+    <div class="box hidden fade-in" id="room3">
+        <div class="korean-pattern">⛩️</div>
+        <h2>الغرفة الأخيرة: معبد جيونجو</h2>
+        <p>أنت في قلب المعبد الكوري القديم. بوابة القلب تنتظر من يملك المفتاح والكلمة السرية.</p>
+        
+        <div class="clue-box">
+            <b>🎯 التحدي الأخير:</b> "افتح بوابة القلب لتكتشف الكنز الكوري الأصيل."
+        </div>
+        
+        <button onclick="escape()">🚪 فتح بوابة القلب</button>
+    </div>
+
+</div>
+
+<div id="message"></div>
+
+<div id="resetContainer" class="hidden">
+    <button class="reset-btn" onclick="resetGame()">🔄 إعادة اللعب</button>
+</div>
+
+<script>
+
+let hasKey = false;
+let unlocked = false;
+
+function takeKey() {
+    hasKey = true;
+    document.getElementById("inventory").innerHTML = 
+        "🎒 الحقيبة: مفتاح كوري ذهبي 🇰🇷";
+    document.getElementById("message").innerHTML = 
+        "✨ وجدت مفتاحاً كورياً ذهبياً يلمع في الرمال!";
+    document.getElementById("message").className = "success";
+    document.getElementById("room2").classList.remove("hidden");
+}
+
+function checkCode() {
+    let answer = document.getElementById("code").value.trim();
+    
+    if(answer === "احبك يا دودي") {
+        unlocked = true;
+        document.getElementById("message").innerHTML = 
+            "🎉 صحيح! باب بوسان ينفتح ببطء...";
+        document.getElementById("message").className = "success";
+        document.getElementById("room3").classList.remove("hidden");
+    } else {
+        document.getElementById("message").innerHTML = 
+            "❌ كلمة السر خاطئة... الباب يقاوم الإغلاق.";
+        document.getElementById("message").className = "error";
+    }
+}
+
+function escape() {
+    if(hasKey && unlocked) {
+        document.getElementById("message").innerHTML = 
+            "🎊 <b>تهانينا!</b> هربت من المعبد الكوري!<br><br>" +
+            "🇰🇷 الكنز الحقيقي كان <b>الحب</b> الذي فتح كل الأبواب.<br>" +
+            "🌸 كوريا الجنوبية تنتظرك في رحلتك القادمة!";
+        document.getElementById("message").className = "success";
+        document.getElementById("resetContainer").classList.remove("hidden");
+    } else if(!hasKey) {
+        document.getElementById("message").innerHTML = 
+            "🔒 البوابة مغلقة... المفتاح الكوري مفقود!";
+        document.getElementById("message").className = "error";
+    } else {
+        document.getElementById("message").innerHTML = 
+            "🔒 البوابة مغلقة... كلمة السر غير معروفة!";
+        document.getElementById("message").className = "error";
+    }
+}
+
+function resetGame() {
+    hasKey = false;
+    unlocked = false;
+    document.getElementById("code").value = "";
+    document.getElementById("inventory").innerHTML = "🎒 الحقيبة: فارغة";
+    document.getElementById("message").innerHTML = "";
+    document.getElementById("room2").classList.add("hidden");
+    document.getElementById("room3").classList.add("hidden");
+    document.getElementById("resetContainer").classList.add("hidden");
+}
+
+</script>
+
+</body>
+</html>

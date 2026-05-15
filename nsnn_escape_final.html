@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الهروب من NSNN</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Tajawal', Arial, sans-serif;
+    background: linear-gradient(135deg, #1a0000 0%, #0d0d0d 50%, #000000 100%);
+    color: #e8e8e8;
+    text-align: center;
+    min-height: 100vh;
+}
+h1 {
+    color: #ff0000;
+    margin-top: 20px;
+    font-size: 2.2em;
+    font-weight: 900;
+    text-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+    animation: flicker 2s infinite;
+}
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+.subtitle {
+    color: #8b0000;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+.school-img {
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 0, 0, 0.5);
+    margin: 15px auto;
+    display: block;
+}
+#room { margin-top: 20px; padding: 20px; }
+.box {
+    background: linear-gradient(145deg, #2a0a0a 0%, #1a0505 100%);
+    padding: 25px;
+    margin: 15px auto;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+}
+.box h2 { color: #ff0000; margin-bottom: 15px; }
+.box p { color: #b8c5d6; line-height: 1.8; margin-bottom: 15px; }
+.equation-box {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px dashed rgba(255, 0, 0, 0.4);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px 0;
+    font-family: 'Courier New', monospace;
+    text-align: left;
+    direction: ltr;
+}
+.equation-box .formula {
+    color: #ff0000;
+    font-size: 1.3em;
+    text-align: center;
+    margin: 10px 0;
+}
+.equation-box .explain {
+    color: #b8c5d6;
+    font-size: 0.9em;
+    text-align: right;
+    direction: rtl;
+    margin-top: 10px;
+}
+.clue-box {
+    background: rgba(139, 0, 0, 0.2);
+    border: 1px dashed rgba(255, 0, 0, 0.4);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px 0;
+}
+.clue-box b { color: #ff0000; }
+button {
+    padding: 12px 25px;
+    margin-top: 15px;
+    background: linear-gradient(135deg, #8b0000 0%, #4a0000 100%);
+    border: none;
+    cursor: pointer;
+    border-radius: 25px;
+    font-weight: bold;
+    color: white;
+    font-size: 1em;
+}
+input {
+    padding: 12px;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 25px;
+    border: 2px solid rgba(255, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.5);
+    color: #e8e8e8;
+    text-align: center;
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+#inventory {
+    margin-top: 20px;
+    color: #ff0000;
+    font-size: 1.1em;
+    font-weight: bold;
+    background: rgba(139, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+}
+.hidden { display: none; }
+#message {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #ff0000;
+    font-weight: bold;
+    min-height: 30px;
+}
+.success { color: #00ff88 !important; }
+.error { color: #ff4757 !important; }
+.final-message {
+    font-size: 1.5em !important;
+    color: #00ff88 !important;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+.happy-mode {
+    background: linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 50%, #0d1127 100%) !important;
+}
+.happy-mode h1 { color: #00d4ff !important; text-shadow: 0 0 20px rgba(0, 212, 255, 0.5) !important; animation: none !important; }
+.happy-mode .subtitle { color: #00ff88 !important; }
+.happy-mode .box { background: linear-gradient(145deg, #1a2a4a 0%, #0f1a2f 100%) !important; border: 1px solid rgba(0, 212, 255, 0.3) !important; }
+.happy-mode .box h2 { color: #00d4ff !important; }
+.happy-mode button { background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%) !important; }
+.happy-mode #inventory { color: #00ff88 !important; background: rgba(0, 255, 136, 0.1) !important; border: 1px solid rgba(0, 255, 136, 0.3) !important; }
+.happy-mode #message { color: #00d4ff !important; }
+</style>
+</head>
+
+<body id="body">
+
+<h1>🔬 الهروب من NSNN 🔬</h1>
+<p class="subtitle">المدرسة الوطنية العليا لعلوم النانو... المسكونة!</p>
+
+<img src="https://www.nsnn.edu.dz/images/logo.png" alt="NSNN" style="width:90%;max-width:500px;border-radius:15px;border:2px solid rgba(255,0,0,0.5);margin:15px auto;display:block;">
+
+<div id="inventory">🎒 المعدات: فارغة</div>
+
+<div id="room">
+
+    <div class="box" id="room1">
+        <h2>🚪 البوابة الرئيسية</h2>
+        <p>أنت محاصر في NSNN! أرواح بلحمدي الشريرة تطاردك!</p>
+        <p>🔴 <b>المعادلة الأولى:</b> حلها لتجد المفتاح!</p>
+        <div class="equation-box">
+            <div class="formula">E = hν</div>
+            <div class="explain">
+                <b>معادلة بلانك للطاقة:</b><br>
+                h = 6.626 × 10⁻³⁴ J·s<br>
+                ν = 5 × 10¹⁴ Hz<br><br>
+                💡 <b>احسبي E بالصيغة العلمية:</b> E = ? × 10⁻¹⁹ J
+            </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.8);border:2px solid rgba(255,0,0,0.5);border-radius:15px;padding:20px;margin:15px 0;">
+            <p>🔐 <b>اكتبي الإجابة (الرقم فقط):</b></p>
+            <input type="text" id="eq1-answer" placeholder="اكتبي الإجابة هنا..."><br>
+            <button onclick="solveEquation1()">🔓 فك القفل</button>
+        </div>
+    </div>
+
+    <div class="box hidden" id="room2">
+        <h2>🧪 المختبر المركزي</h2>
+        <p>المختبر مظلم... أرواح بلحمدي تنتظرك!</p>
+        <p>🔴 <b>المعادلة الثانية:</b> حليها لتفتحي الباب!</p>
+        <div class="equation-box">
+            <div class="formula">λ = h / (mv)</div>
+            <div class="explain">
+                <b>معادلة دي برولي للموجة المادية:</b><br>
+                h = 6.626 × 10⁻³⁴ J·s<br>
+                m = 9.11 × 10⁻³¹ kg<br>
+                v = 2.2 × 10⁶ m/s<br><br>
+                💡 <b>احسبي λ بالنانومتر:</b> λ = ? nm
+            </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.8);border:2px solid rgba(255,0,0,0.5);border-radius:15px;padding:20px;margin:15px 0;">
+            <p>🔐 <b>اكتبي الإجابة (الرقم فقط):</b></p>
+            <input type="text" id="eq2-answer" placeholder="اكتبي الإجابة هنا..."><br>
+            <button onclick="solveEquation2()">🔓 فك القفل</button>
+        </div>
+    </div>
+
+    <div class="box hidden" id="room3">
+        <h2>🌟 المخرج النهائي</h2>
+        <p>أنتِ على بعد كلمة سر من الحرية!</p>
+        <p>🔴 <b>اكتبي كلمة السر لطرد الأرواح الشريرة:</b></p>
+        <div class="clue-box">
+            <b>💡 فكرة:</b> "الشخص الذي يريد الخروج من بلحمدي... اكتبي اسمه بالإنجليزية الكبيرة!"
+        </div>
+        <input type="text" id="code" placeholder="اكتبي كلمة السر هنا..."><br>
+        <button onclick="checkCode()">🔓 طرد الأرواح الشريرة</button>
+    </div>
+
+</div>
+
+<div id="message"></div>
+
+<script>
+let hasKey = false;
+let unlocked = false;
+
+function solveEquation1() {
+    let answer = document.getElementById("eq1-answer").value.trim();
+    if(answer === "3.313" || answer === "3.31" || answer === "3.3") {
+        hasKey = true;
+        document.getElementById("inventory").innerHTML = "🎒 المعدات: مفتاح نانوي ذهبي 🔑";
+        document.getElementById("message").innerHTML = "✨ صحيح! وجدت المفتاح النانوي!";
+        document.getElementById("message").className = "success";
+        document.getElementById("room2").classList.remove("hidden");
+    } else {
+        document.getElementById("message").innerHTML = "❌ خاطئ! أرواح بلحمدي تضحك... حاولي مرة أخرى!";
+        document.getElementById("message").className = "error";
+    }
+}
+
+function solveEquation2() {
+    let answer = document.getElementById("eq2-answer").value.trim();
+    if(answer === "0.33" || answer === "0.330" || answer === "0.3") {
+        unlocked = true;
+        document.getElementById("message").innerHTML = "🎉 صحيح! الباب ينفتح ببطء...";
+        document.getElementById("message").className = "success";
+        document.getElementById("room3").classList.remove("hidden");
+    } else {
+        document.getElementById("message").innerHTML = "❌ خاطئ! الأرواح تقترب منكِ... حاولي مرة أخرى!";
+        document.getElementById("message").className = "error";
+    }
+}
+
+function checkCode() {
+    let answer = document.getElementById("code").value.trim();
+    if(answer === "DIE BELHAMDI") {
+        document.body.classList.add("happy-mode");
+        document.getElementById("inventory").innerHTML = "🎒 المعدات: حرية! 🕊️";
+        document.getElementById("message").innerHTML = 
+            "🎊 <b class='final-message'>تهانينا!</b><br><br>" +
+            "✨ <b>لقد خرجت منكِ أرواح بلحمدي الشريرة!</b> ✨<<br><br>" +
+            "🔬 NSNN أصبحت الآن مدرسة سعيدة!<br>" +
+            "🌟 الحب أقوى من أي معادلة فيزيائية!<br><br>" +
+            "💖 DIE BELHAMDI! 💖<<br>" +
+            "🕊️ أنتِ الآن حرة! 🕊️";
+        document.getElementById("message").className = "success";
+    } else {
+        document.getElementById("message").innerHTML = "❌ كلمة السر خاطئة! أرواح بلحمدي ترفض المغادرة!";
+        document.getElementById("message").className = "error";
+    }
+}
+</script>
+
+</body>
+</html>
